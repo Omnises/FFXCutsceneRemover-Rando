@@ -33,8 +33,8 @@ class RonsoTransition : Transition
             }
             else if (MemoryWatchers.RonsoTransition.Current == (BaseCutsceneValue + 0x14056) && MemoryWatchers.Menu.Current == 1 && Stage == 2)
             {
-                Transition FormationSwitch = new Transition { ForceLoad = false, ConsoleOutput = true, EncountersActiveFlag = EncountersActive, FormationSwitch = Transition.formations.PostBiranYenke, Formation = RonsoFormation, Description = "Fix party after Biran and Yenke" };
-                FormationSwitch.Execute();
+                //Transition FormationSwitch = new Transition { ForceLoad = false, ConsoleOutput = true, EncountersActiveFlag = EncountersActive, FormationSwitch = Transition.formations.PostBiranYenke, Formation = RonsoFormation, Description = "Fix party after Biran and Yenke" };
+                //FormationSwitch.Execute();
 
                 Stage += 1;
             }

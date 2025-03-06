@@ -24,7 +24,7 @@ class ChocoboEaterTransition : Transition
             {
                 WriteValue<int>(MemoryWatchers.ChocoboEaterTransition, BaseCutsceneValue + 0xC96);// 30A
 
-                byte[] ActiveParty = process.ReadBytes(MemoryWatchers.Formation.Address, 3);
+                /*byte[] ActiveParty = process.ReadBytes(MemoryWatchers.Formation.Address, 3);
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -33,9 +33,9 @@ class ChocoboEaterTransition : Transition
                         Transition actorPositions;
                         //Position Tidus if he is in the party
                         actorPositions = new Transition { ForceLoad = false, ConsoleOutput = false, TargetActorIDs = new short[] { 1 }, Target_x = 100.0f, Target_y = 0.0f, Target_z = 30.0f };
-                        actorPositions.Execute();
+                        actorPositions.Execute(); 
                     }
-                }
+                } */
 
                 Stage += 1;
             }

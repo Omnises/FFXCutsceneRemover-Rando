@@ -42,8 +42,8 @@ class GuiTransition : Transition
             }.Execute();
 
             // Reposition Party Members just off screen to run into battle
-            Transition actorPositions = new Transition { ForceLoad = false, ConsoleOutput = false, PartyTarget_x = 427.0f, PartyTarget_z = 3350.0f, PositionPartyOffScreen = true };
-            actorPositions.Execute();
+            //Transition actorPositions = new Transition { ForceLoad = false, ConsoleOutput = false, PartyTarget_x = 427.0f, PartyTarget_z = 3350.0f, PositionPartyOffScreen = true };
+            //actorPositions.Execute();
 
             Stage += 1;
 
@@ -71,7 +71,7 @@ class GuiTransition : Transition
                 ScriptedBattleVar3 = 0x00000129,
                 ScriptedBattleVar4 = 0x00000014,
                 EncounterTrigger = 2,
-                FormationSwitch = formations.PreGui2,
+                //FormationSwitch = formations.PreGui2,
                 Description = "Sinspawn Gui 2",
                 ForceLoad = false
             }.Execute();
@@ -84,7 +84,7 @@ class GuiTransition : Transition
         {
             process.Suspend();
 
-            new Transition { Formation = GuiFormation, FormationSwitch = formations.PostGui, Description = "Fix Party", ForceLoad = false }.Execute();
+            //new Transition { Formation = GuiFormation, FormationSwitch = formations.PostGui, Description = "Fix Party", ForceLoad = false }.Execute();
 
             Stage += 1;
 

@@ -1125,9 +1125,9 @@ static class Transitions
         { 
             () => { return MemoryWatchers.EncounterMapID.Current == 87 && MemoryWatchers.EncounterFormationID2.Current == 3 && MemoryWatchers.RoomNumber.Current == 280 && MemoryWatchers.Storyline.Current == 1885; }, 
             new Transition { RoomNumber = 280, Storyline = 1940, SpawnPoint = 4, EncounterMapID = 0, EncounterFormationID2 = 0, Description = "Home Chimera"} },
-        { 
+        /*{ 
             () => { return MemoryWatchers.EncounterMapID.Current == 52 && MemoryWatchers.EncounterFormationID2.Current == 0 && MemoryWatchers.RoomNumber.Current == 277 && MemoryWatchers.Storyline.Current == 2040; },
-            new Transition { RoomNumber = 205, Storyline = 2075, EncounterMapID = 0, EncounterFormationID2 = 0, TargetFramerate = 2, Description = "Evrae"} },
+            new Transition { RoomNumber = 205, Storyline = 2075, EncounterMapID = 0, EncounterFormationID2 = 0, TargetFramerate = 2, Description = "Evrae"} },*/
         { 
             () => { return MemoryWatchers.EncounterMapID.Current == 56 && MemoryWatchers.EncounterFormationID1.Current == 1 && MemoryWatchers.EncounterFormationID2.Current == 0 && MemoryWatchers.Storyline.Current == 2280; }, 
             new Transition { RoomNumber = 183, Storyline = 2290, SpawnPoint = 4, EncounterMapID = 0, EncounterFormationID1 = 0, EncounterFormationID2 = 0, Description = "Seymour Natus"} },

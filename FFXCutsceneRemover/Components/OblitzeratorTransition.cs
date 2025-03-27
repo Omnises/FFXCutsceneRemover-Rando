@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FFXCutsceneRemover.Logging;
+using System.Collections.Generic;
 
 namespace FFXCutsceneRemover;
 
@@ -14,25 +15,33 @@ class OblitzeratorTransition : Transition
                 FormationSwitch = formations.PreOblitzerator;
                 base.Execute();
 
-                BaseCutsceneValue = MemoryWatchers.OblitzeratorTransition.Current;
+                BaseCutsceneValue = MemoryWatchers.EventFileStart.Current;
+                DiagnosticLog.Information($"Oblitz Transition Value: {BaseCutsceneValue}");
+                DiagnosticLog.Information($"Event File Start Value: {MemoryWatchers.EventFileStart.Current}");
                 Stage += 1;
 
             }
-            else if (MemoryWatchers.OblitzeratorTransition.Current >= (BaseCutsceneValue + 0xEC) && Stage == 1) // 21B , EC
+            else if (MemoryWatchers.OblitzeratorTransition.Current >= (BaseCutsceneValue + 0x513B) && Stage == 1) // 0x41F7 in Event Script
             {
-                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x142);// 30A
+                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x5191); // 0x424D in Event Script - Load Move Animation
 
                 Stage += 1;
             }
-            else if (MemoryWatchers.OblitzeratorTransition.Current == (BaseCutsceneValue + 0x1A0) && Stage == 2) // 21B , EC
+            else if (MemoryWatchers.OblitzeratorTransition.Current >= (BaseCutsceneValue + 0x5194) && Stage == 2) // 0x4250 in Event Script
             {
-                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x30A);// 30A
+                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x52AE); // 0x4364 in Event Script - Play BGM
 
                 Stage += 1;
             }
-            else if (MemoryWatchers.BattleState2.Current == 1 && Stage == 3)
+            else if (MemoryWatchers.OblitzeratorTransition.Current >= (BaseCutsceneValue + 0x52B4) && Stage == 3) // 0x4370 in Event Script
             {
-                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x655);// 
+                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x5359); // 0x4415 in Event Script - Set Battle Flags / Launch Battle
+
+                Stage += 1;
+            }
+            else if (MemoryWatchers.BattleState2.Current == 1 && Stage == 4)
+            {
+                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x56A4); // 0x4760 in Event Script - Play BGM
                 Stage += 1;
             }
         }

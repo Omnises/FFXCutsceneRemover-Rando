@@ -17,24 +17,24 @@ class BFATransition : Transition
             //WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xE1); //Not currently working as desired
             Stage += 1;
         }
-        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xC310) && Stage == 2) // 0x478
+        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xC08C) && Stage == 2) // 0xA3E5 in event script
         {
-            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xCDB2); // 0xD7F
+            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xCDBB); // 0xAE93 in event script
             Stage += 1;
         }
-        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xCDCA) && Stage == 3) // 0xD80
+        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xCDC4) && Stage == 3) // 0xAE9C in event script
         {
-            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xCF98); // 0x10BA
+            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xCF98); // 0xB070 in event script
             Stage += 1;
         }
-        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xD00D) && Stage == 4) // 0xD80
+        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xCFB9) && Stage == 4) // 0xB091 in event script
         {
-            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xD126); // 0x10BA
+            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xD126); // 0xB1FE in event script
             Stage += 1;
         }
-        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xD150) && Stage == 5) // 0x1135
+        else if (MemoryWatchers.BFATransition.Current >= (BaseCutsceneValue + 0xD12C) && Stage == 5) // 0xB204 in event script
         {
-            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xD350); // 0x1442 D31D
+            WriteValue<int>(MemoryWatchers.BFATransition, BaseCutsceneValue + 0xD382); // 0xB45A in event script
             Stage += 1;
         }
     }

@@ -22,9 +22,9 @@ class GuardsTransition : Transition
                 BaseCutsceneValue = MemoryWatchers.EventFileStart.Current;
                 Stage += 1;
             }
-            else if (MemoryWatchers.GuardsTransition.Current > (BaseCutsceneValue + 0x86CA) && Stage == 1)
+            else if (MemoryWatchers.GuardsTransition.Current >= (BaseCutsceneValue + 0x876E) && Stage == 1)
             {
-                WriteValue<int>(MemoryWatchers.GuardsTransition, BaseCutsceneValue + 0x90DB);
+                WriteValue<int>(MemoryWatchers.GuardsTransition, BaseCutsceneValue + 0x90E1);
                 Stage += 1;
             }
             else if (MemoryWatchers.GuardsTransition.Current == (BaseCutsceneValue + 0x90F0) && Stage == 2)

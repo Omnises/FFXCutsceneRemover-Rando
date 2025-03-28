@@ -16,8 +16,6 @@ class OblitzeratorTransition : Transition
                 base.Execute();
 
                 BaseCutsceneValue = MemoryWatchers.EventFileStart.Current;
-                DiagnosticLog.Information($"Oblitz Transition Value: {BaseCutsceneValue}");
-                DiagnosticLog.Information($"Event File Start Value: {MemoryWatchers.EventFileStart.Current}");
                 Stage += 1;
 
             }

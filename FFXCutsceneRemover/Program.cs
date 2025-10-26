@@ -33,7 +33,7 @@ internal sealed class CsrConfigBinder : BinderBase<CsrConfig>
     private static bool ResolveMandatoryBoolArg(Option<bool?> opt)
     {
         Console.WriteLine(opt.Description);
-        return Console.ReadLine().ToUpper()[0] == 'Y';
+        return Console.ReadLine()?.ToUpper().StartsWith("Y") ?? false;
     }
 
     protected override CsrConfig GetBoundValue(BindingContext bindingContext)
@@ -75,8 +75,12 @@ public class Program
     private const int patchID = 0;
     private static List<(string, byte)> startGameText;
 
+    static Mutex mutex = new Mutex(true, "CSR");
+
     static void Main(string[] args)
     {
+        if (CheckExistingCSR()) return;
+
         DiagnosticLog.Information($"Cutscene Remover for Final Fantasy X, version {majorID}.{minorID}.{patchID}");
         if (args.Length > 0) DiagnosticLog.Information($"!!! LAUNCHED WITH COMMAND-LINE OPTIONS: {string.Join(' ', args)} !!!");
 
@@ -134,7 +138,7 @@ public class Program
             {
                 rngMod = new RNGMod();
                 rngMod.Game = Game;
-                startGameText.Add(($"[RNG Fix Mod Enabled]", 0x4b));
+                startGameText.Add(($"[True RNG Enabled]", 0x4b));
             }
 
             startGameText.Add(($"Start Game?", 0x50));
@@ -194,6 +198,19 @@ public class Program
                 Thread.Sleep(csrConfig.MtSleepInterval);
             }
         }
+    }
+    
+    private static bool CheckExistingCSR()
+    {
+        bool isRunning = !mutex.WaitOne(TimeSpan.Zero, true);
+
+        if (isRunning)
+        {
+            Console.WriteLine("Cutscene Remover is already running!");
+            Console.ReadLine();
+        }
+
+        return isRunning;
     }
 
     private static Process ConnectToTarget(string TargetName)

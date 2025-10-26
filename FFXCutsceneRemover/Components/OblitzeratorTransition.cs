@@ -39,7 +39,7 @@ class OblitzeratorTransition : Transition
             }
             else if (MemoryWatchers.BattleState2.Current == 1 && Stage == 4)
             {
-                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x56A4); // 0x4760 in Event Script - Play BGM
+                WriteValue<int>(MemoryWatchers.OblitzeratorTransition, BaseCutsceneValue + 0x569B); // 0x4760 in Event Script - Play BGM
                 Stage += 1;
             }
         }

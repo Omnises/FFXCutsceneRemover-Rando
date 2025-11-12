@@ -5,7 +5,6 @@ using System.Linq;
 
 using FFXCutsceneRemover.ComponentUtil;
 using FFXCutsceneRemover.Logging;
-using FFXCutsceneRemover.Resources;
 
 namespace FFXCutsceneRemover;
 
@@ -50,7 +49,7 @@ public class Transition
     public float? PartyTarget_y = null;
     public float? PartyTarget_z = null;
 
-    public formations? FormationSwitch = null;
+    //public formations? FormationSwitch = null;
 
     /* Only add members here for memory addresses that we want to write the value to.
      * If we only ever read the value then there is no need to add it here. */
@@ -277,9 +276,6 @@ public class Transition
     public byte? LucaMusicSpheresUnlocked = null;
 
     public byte[] RNGArrayOpBytes = null;
-
-    public bool SetSeed = false;
-    public int? SetSeedValue = null;
 
     // Bitmask Addition
     public int? AddCalmLandsBitmask = null;
@@ -546,7 +542,7 @@ public class Transition
             WriteValue<byte>(MemoryWatchers.AuronOverdrives, (byte)(MemoryWatchers.AuronOverdrives.Current | AddOverdrive));
         }
 
-        UpdateFormation(Formation);
+        //UpdateFormation(Formation);
 
         if (PositionTidusAfterLoad)
         {
@@ -597,12 +593,6 @@ public class Transition
                 }
             }
         }
-
-        if (SetSeed)
-        {
-            SetRngValues();
-        }
-
     }
 
     /* Set the force load bit. Will immediately cause a fade and load. */
@@ -974,7 +964,7 @@ public class Transition
 
     // Formation Functions
 
-    public enum formations
+    /*public enum formations
     {
         Klikk2,
         PreKimahri,
@@ -998,9 +988,9 @@ public class Transition
         HighbridgeStart,
         PreNatus,
         PostBiranYenke
-    }
+    }*/
 
-    private void UpdateFormation(byte[] initialFormation = null)
+    /*private void UpdateFormation(byte[] initialFormation = null)
     {
         byte[] formation = process.ReadBytes(MemoryWatchers.Formation.Address, 10);
         byte initialPosition1 = 0xFF;
@@ -1166,8 +1156,8 @@ public class Transition
             }
             RemoveDuplicates(formation);
             WriteBytes(MemoryWatchers.Formation, formation);
-        }
-    }
+        } 
+    }*/
 
     private void RemoveDuplicates(byte[] formation)
     {
@@ -1193,7 +1183,7 @@ public class Transition
         }
     }
 
-    public int GetFirstEmptyReservePosition(byte[] formation)
+    /*public int GetFirstEmptyReservePosition(byte[] formation)
     {
         int formationSize = formation.Length;
 
@@ -1205,9 +1195,9 @@ public class Transition
             }
         }
         return 0;
-    }
+    }*/
 
-    public byte[] RemoveCharacter(byte[] formation, byte Character)
+    /*public byte[] RemoveCharacter(byte[] formation, byte Character)
     {
         int formationSize = formation.Length;
 
@@ -1219,9 +1209,9 @@ public class Transition
             }
         }
         return formation;
-    }
+    }*/
 
-    public byte[] RemoveAll(byte[] formation)
+    /*public byte[] RemoveAll(byte[] formation)
     {
         int formationSize = formation.Length;
 
@@ -1239,9 +1229,9 @@ public class Transition
         WriteValue<byte>(MemoryWatchers.EnableRikku, 0);
 
         return formation;
-    }
+    }*/
 
-    public byte[] AddCharacter(byte[] formation, byte Character)
+    /*public byte[] AddCharacter(byte[] formation, byte Character)
     {
         if (Array.IndexOf(formation, Character) == -1)
         {
@@ -1250,9 +1240,9 @@ public class Transition
             formation[Position] = Character;
         }
         return formation;
-    }
+    }*/
 
-    public byte[] SwapCharacterWithPosition(byte[] formation, byte Character, int newPosition)
+    /*public byte[] SwapCharacterWithPosition(byte[] formation, byte Character, int newPosition)
     {
         int oldposition = Array.IndexOf(formation, Character);
 
@@ -1261,9 +1251,9 @@ public class Transition
         formation[newPosition] = temp;
 
         return formation;
-    }
+    }*/
 
-    public byte[] SwapPositionWithFirstEmptyReservePosition(byte[] formation, int Position)
+    /*public byte[] SwapPositionWithFirstEmptyReservePosition(byte[] formation, int Position)
     {
         int newPosition = GetFirstEmptyReservePosition(formation);
 
@@ -1271,9 +1261,9 @@ public class Transition
         formation[Position] = 0xFF;
 
         return formation;
-    }
+    }*/
 
-    public byte[] FillMainPartySlotIfEmpty(byte[] formation, byte Character)
+    /*public byte[] FillMainPartySlotIfEmpty(byte[] formation, byte Character)
     {
         for (int i = 0; i < 3; i++)
         {
@@ -1284,25 +1274,6 @@ public class Transition
             }
         }
         return formation;
-    }
-
-    private void SetRngValues()
-    {
-        for (int i = 0; i < 68; i++)
-        {
-            int rngValue = rngRoll(i, (int)SetSeedValue);
-            WriteValue<int>(new MemoryWatcher<int>(process.Modules[0].BaseAddress.ToInt32() + MemoryLocations.rngArrayStart.BaseAddress + 0x04 * i), rngValue);
-        }
-    }
-
-    private int rngRoll(int Index, int CurrentValue)
-    {
-        int temp;
-
-        temp = CurrentValue * 0x5D588B65 + 0x3C35;
-        temp = (temp >> 0x10) + (temp << 0x10);
-        SetSeedValue = temp;
-        return temp & 0x7FFFFFFF;
-    }
+    }*/
 
 }

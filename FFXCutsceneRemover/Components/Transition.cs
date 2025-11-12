@@ -259,11 +259,11 @@ public class Transition
     public byte? BattleRewardEquipCount = null;
     public byte[] BattleRewardEquip1 = null;
 
-    public byte[] ItemsStart = null;
-    public byte[] ItemsQtyStart = null;
+    //public byte[] ItemsStart = null;
+    //public byte[] ItemsQtyStart = null;
 
-    public int[] CharacterAPRewards = null;
-    public byte[] CharacterAPFlags = null;
+    //public int[] CharacterAPRewards = null;
+    //public byte[] CharacterAPFlags = null;
 
     public int? MenuValue1 = null;
     public int? MenuValue2 = null;
@@ -1157,7 +1157,7 @@ public class Transition
             RemoveDuplicates(formation);
             WriteBytes(MemoryWatchers.Formation, formation);
         } 
-    }*/
+    }
 
     private void RemoveDuplicates(byte[] formation)
     {
@@ -1181,7 +1181,7 @@ public class Transition
                 formation[i] = 0xFF;
             }
         }
-    }
+    }*/
 
     /*public int GetFirstEmptyReservePosition(byte[] formation)
     {

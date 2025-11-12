@@ -16,17 +16,16 @@ internal sealed class CsrConfigBinder : BinderBase<CsrConfig>
 {
     private readonly Option<bool?> _optCsrOn;
     //private readonly Option<bool?> _optCsrBreakOn;
-    private readonly Option<bool?> _optRngOn;
+    //private readonly Option<bool?> _optRngOn;
     private readonly Option<int?> _optMtSleepInterval;
-
     public CsrConfigBinder(Option<bool?> optCsrOn,
                            //Option<bool?> optCsrBreakOn,
-                           Option<bool?> optRngOn,
+                           //Option<bool?> optRngOn,
                            Option<int?> optMtSleepInterval)
     {
         _optCsrOn = optCsrOn;
         //_optCsrBreakOn = optCsrBreakOn;
-        _optRngOn = optRngOn;
+        //_optRngOn = optRngOn;
         _optMtSleepInterval = optMtSleepInterval;
     }
 
@@ -50,7 +49,7 @@ internal sealed record CsrConfig
 {
     public bool CsrOn { get; set; }
     //public bool CsrBreakOn { get; set; }
-    public bool RngOn { get; init; }
+    //public bool RngOn { get; init; }
     public int  MtSleepInterval { get; init; }
 };
 

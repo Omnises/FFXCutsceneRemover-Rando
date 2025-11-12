@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FFXCutsceneRemover.Logging;
+using System.Collections.Generic;
 
 namespace FFXCutsceneRemover;
 
@@ -13,13 +14,13 @@ class ExtractorTransition : Transition
             {
                 base.Execute();
 
-                BaseCutsceneValue = MemoryWatchers.ExtractorTransition.Current;
+                BaseCutsceneValue = MemoryWatchers.EventFileStart.Current;
                 Stage += 1;
 
             }
-            else if (MemoryWatchers.ExtractorTransition.Current == (BaseCutsceneValue + 0x1E3) && MemoryWatchers.BattleState2.Current == 1 && Stage == 1)
+            else if (MemoryWatchers.ExtractorTransition.Current == (BaseCutsceneValue + 0x16CA) && MemoryWatchers.BattleState2.Current == 1 && Stage == 1)
             {
-                WriteValue<int>(MemoryWatchers.ExtractorTransition, BaseCutsceneValue + 0x28B);// 28E
+                WriteValue<int>(MemoryWatchers.ExtractorTransition, BaseCutsceneValue + 0x1772);
                 Stage += 1;
             }
         }

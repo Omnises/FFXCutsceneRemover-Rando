@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36127.28 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXCutsceneRemover", "FFXCutsceneRemover\FFXCutsceneRemover.csproj", "{E37F9231-7A8F-4667-8BDE-45D0D13127AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXSpeedrunMod", "FFXCutsceneRemover\FFXSpeedrunMod.csproj", "{E37F9231-7A8F-4667-8BDE-45D0D13127AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

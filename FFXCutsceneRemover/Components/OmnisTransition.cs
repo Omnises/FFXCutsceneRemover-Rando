@@ -17,11 +17,23 @@ class OmnisTransition : Transition
         }
         else if (MemoryWatchers.OmnisTransition.Current >= (BaseCutsceneValue + 0x1DB0) && Stage == 1)
         {
+            WriteValue<int>(MemoryWatchers.OmnisTransition, BaseCutsceneValue + 0x1E2C);
+
+            Stage += 1;
+        }
+        else if (MemoryWatchers.OmnisTransition.Current >= (BaseCutsceneValue + 0x1E3B) && Stage == 2)
+        {
+            WriteValue<int>(MemoryWatchers.OmnisTransition, BaseCutsceneValue + 0x25B5);
+
+            Stage += 1;
+        }
+        else if (MemoryWatchers.OmnisTransition.Current >= (BaseCutsceneValue + 0x25BB) && Stage == 3)
+        {
             WriteValue<int>(MemoryWatchers.OmnisTransition, BaseCutsceneValue + 0x274A);
 
             Stage += 1;
         }
-        else if (MemoryWatchers.OmnisTransition.Current >= (BaseCutsceneValue + 0x2786) && MemoryWatchers.BattleState2.Current == 22 && Stage == 2)
+        else if (MemoryWatchers.OmnisTransition.Current >= (BaseCutsceneValue + 0x2786) && MemoryWatchers.BattleState2.Current == 22 && Stage == 4)
         {
             WriteValue<int>(MemoryWatchers.OmnisTransition, BaseCutsceneValue + 0x2D84);
 

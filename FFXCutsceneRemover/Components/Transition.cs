@@ -5,6 +5,7 @@ using System.Linq;
 
 using FFXCutsceneRemover.ComponentUtil;
 using FFXCutsceneRemover.Logging;
+using FFXCutsceneRemover.Resources;
 
 namespace FFXCutsceneRemover;
 
@@ -276,6 +277,9 @@ public class Transition
     public byte? LucaMusicSpheresUnlocked = null;
 
     public byte[] RNGArrayOpBytes = null;
+
+    public bool SetSeed = false;
+    public int? SetSeedValue = null;
 
     // Bitmask Addition
     public int? AddCalmLandsBitmask = null;
@@ -593,6 +597,12 @@ public class Transition
                 }
             }
         }
+
+        if (SetSeed)
+        {
+            SetRngValues();
+        }
+
     }
 
     /* Set the force load bit. Will immediately cause a fade and load. */
@@ -1274,6 +1284,25 @@ public class Transition
             }
         }
         return formation;
+    }
+
+    private void SetRngValues()
+    {
+        for (int i = 0; i < 68; i++)
+        {
+            int rngValue = rngRoll(i, (int)SetSeedValue);
+            WriteValue<int>(new MemoryWatcher<int>(process.Modules[0].BaseAddress.ToInt32() + MemoryLocations.rngArrayStart.BaseAddress + 0x04 * i), rngValue);
+        }
+    }
+
+    private int rngRoll(int Index, int CurrentValue)
+    {
+        int temp;
+
+        temp = CurrentValue * 0x5D588B65 + 0x3C35;
+        temp = (temp >> 0x10) + (temp << 0x10);
+        SetSeedValue = temp;
+        return temp & 0x7FFFFFFF;
     }
 
 }

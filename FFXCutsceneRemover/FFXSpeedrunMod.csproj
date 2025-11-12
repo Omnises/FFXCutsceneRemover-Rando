@@ -4,6 +4,7 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
+		<Platforms>AnyCPU;x86</Platforms>
 	</PropertyGroup>
 
 	<!-- ADDITIONAL PROPERTIES -->
@@ -22,15 +23,15 @@
 
 	<!-- APPLICATION ICON -->
 	<ItemGroup>
-	  <None Include="FFXCSR_icon.ico">
+	  <None Include="FFXCSR_icon.png">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
 	</ItemGroup>
 	
 	<PropertyGroup>
-		<ApplicationIcon>FFXCSR_icon.ico</ApplicationIcon>
-		<PackageIcon>FFXCSR_icon.ico</PackageIcon>
+		<ApplicationIcon>FFXCSR_icon.png</ApplicationIcon>
+		<PackageIcon>FFXCSR_icon.png</PackageIcon>
 	</PropertyGroup>
 	
 </Project>

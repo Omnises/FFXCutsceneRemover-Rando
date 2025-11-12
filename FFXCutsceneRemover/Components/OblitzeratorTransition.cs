@@ -12,7 +12,6 @@ class OblitzeratorTransition : Transition
         {
             if (CutsceneAltList.Contains(MemoryWatchers.CutsceneAlt.Current) && Stage == 0)
             {
-                FormationSwitch = formations.PreOblitzerator;
                 base.Execute();
 
                 BaseCutsceneValue = MemoryWatchers.EventFileStart.Current;

@@ -28,7 +28,7 @@ class NatusTransition : Transition
             else if (MemoryWatchers.NatusTransition.Current == (BaseCutsceneValue + 0xE0F0) && Stage == 1) // 1893
             {
 
-                Transition FormationSwitch = new Transition { ForceLoad = false, ConsoleOutput = true, FormationSwitch = Transition.formations.PreNatus, Description = "Fix party before Natus" };
+                Transition FormationSwitch = new Transition { ForceLoad = false, ConsoleOutput = true, Description = "Fix party before Natus" };
                 FormationSwitch.Execute();
 
                 formation = process.ReadBytes(MemoryWatchers.Formation.Address, 10);

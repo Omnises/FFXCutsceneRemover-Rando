@@ -31,8 +31,7 @@ internal sealed class CsrConfigBinder : BinderBase<CsrConfig>
 
     private static bool ResolveMandatoryBoolArg(Option<bool?> opt)
     {
-        Console.WriteLine(opt.Description);
-        return Console.ReadLine()?.ToUpper().StartsWith("Y") ?? false;
+        return true;
     }
 
     protected override CsrConfig GetBoundValue(BindingContext bindingContext)
@@ -77,7 +76,7 @@ public class Program
         DiagnosticLog.Information($"Cutscene Remover for Final Fantasy X, version {majorID}.{minorID}.{patchID}");
         if (args.Length > 0) DiagnosticLog.Information($"!!! LAUNCHED WITH COMMAND-LINE OPTIONS: {string.Join(' ', args)} !!!");
 
-        optCsrOn           = true;
+        Option<bool?> optCsrOn = new Option<bool?>("--csr", "Enable CSR? [Y/N]");
         //Option<bool?> optCsrBreakOn      = new Option<bool?>("--csrbreak", "Enable break for CSR? [Y/N]");
         //Option<bool?> optRngOn           = new Option<bool?>("--truerng", "Enable True RNG? [Y/N]");
         Option<int?>  optMtSleepInterval = new Option<int?>("--mt_sleep_interval", "Specify the main thread sleep interval. [ms]");

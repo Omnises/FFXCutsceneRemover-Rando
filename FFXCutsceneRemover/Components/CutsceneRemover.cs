@@ -15,6 +15,7 @@ class CutsceneRemover
 {
     public Process Game;
     private bool InBossFight = false;
+    //private bool tidusReset = false;
     private Transition PostBossFightTransition;
     // Keep track of the previously executed transition
     // so we don't execute the same transition twice

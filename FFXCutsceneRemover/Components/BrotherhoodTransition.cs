@@ -16,7 +16,7 @@ class BrotherhoodTransition : Transition
         base.Execute(); // Execute the cutscene transition first (AreaID + Cutscene + SpawnPoint + EnableYuna + EnableLulu)
         int baseAddress = MemoryWatchers.GetBaseAddress();
 
-        int equipmentStructRelativeOffset = 0xD30F2C;
+        /*int equipmentStructRelativeOffset = 0xD30F2C;
         byte equipmentStructSizeBytes = 22;
         byte equipmentEquippedFlagOffset = 0x06;
 
@@ -89,6 +89,6 @@ class BrotherhoodTransition : Transition
                 ItemMenu = IntPtr.Add(ItemMenu, 2);
                 ++count;
             }
-        }
+        }*/
     }
 }

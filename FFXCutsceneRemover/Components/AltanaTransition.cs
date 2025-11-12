@@ -7,7 +7,7 @@ namespace FFXCutsceneRemover;
 
 class AltanaTransition : Transition
 {
-    static private byte[] formation = new byte[] { 0x00, 0x04, 0x06 };
+    //static private byte[] formation = new byte[] { 0x00, 0x04, 0x06 };
 
     static private List<short> CutsceneAltList = new List<short>(new short[] { 1137 });
     public override void Execute(string defaultDescription = "")
@@ -28,7 +28,7 @@ class AltanaTransition : Transition
             {
                 WriteValue<int>(MemoryWatchers.AltanaTransition, BaseCutsceneValue + 0x307);
 
-                formation = process.ReadBytes(MemoryWatchers.Formation.Address, 3);
+                /*formation = process.ReadBytes(MemoryWatchers.Formation.Address, 3);
 
                 Transition actorPositions;
                 //Position Party Member 1
@@ -41,7 +41,7 @@ class AltanaTransition : Transition
 
                 //Position Party Member 3
                 actorPositions = new Transition { ForceLoad = false, ConsoleOutput = false, TargetActorIDs = new short[] { (short)(formation[2] + 1) }, Target_x = 998.0f, Target_y = -30.0f, Target_z = -1414.0f };
-                actorPositions.Execute();
+                actorPositions.Execute(); */
 
                 Stage += 1;
             }

@@ -28,12 +28,12 @@ class NatusTransition : Transition
             else if (MemoryWatchers.NatusTransition.Current == (BaseCutsceneValue + 0xE0F0) && Stage == 1) // 1893
             {
 
-                Transition FormationSwitch = new Transition { ForceLoad = false, ConsoleOutput = true, Description = "Fix party before Natus" };
-                FormationSwitch.Execute();
+                //Transition FormationSwitch = new Transition { ForceLoad = false, ConsoleOutput = true, FormationSwitch = Transition.formations.PreNatus, Description = "Fix party before Natus" };
+                //FormationSwitch.Execute();
 
-                formation = process.ReadBytes(MemoryWatchers.Formation.Address, 10);
+                //formation = process.ReadBytes(MemoryWatchers.Formation.Address, 10);
 
-                WriteValue<int>(MemoryWatchers.NatusTransition, BaseCutsceneValue + 0xE2DF);//
+                /*WriteValue<int>(MemoryWatchers.NatusTransition, BaseCutsceneValue + 0xE2DF);//
 
                 Transition actorPositions;
                 //Position Party Member 1
@@ -50,7 +50,7 @@ class NatusTransition : Transition
 
                 //Position Natus
                 actorPositions = new Transition { ForceLoad = false, ConsoleOutput = false, TargetActorIDs = new short[] { 4222 }, Target_x = 0.0f, Target_y = -29.0f, Target_z = -100.0f };
-                actorPositions.Execute();
+                actorPositions.Execute();*/
 
                 Stage += 1;
             }

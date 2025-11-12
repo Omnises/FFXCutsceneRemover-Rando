@@ -15,17 +15,17 @@ namespace FFXCutsceneRemover;
 internal sealed class CsrConfigBinder : BinderBase<CsrConfig>
 {
     private readonly Option<bool?> _optCsrOn;
-    //private readonly Option<bool?> _optCsrBreakOn;
-    //private readonly Option<bool?> _optRngOn;
+    private readonly Option<bool?> _optCsrBreakOn;
+    private readonly Option<bool?> _optRngOn;
     private readonly Option<int?> _optMtSleepInterval;
     public CsrConfigBinder(Option<bool?> optCsrOn,
-                           //Option<bool?> optCsrBreakOn,
-                           //Option<bool?> optRngOn,
+                           Option<bool?> optCsrBreakOn,
+                           Option<bool?> optRngOn,
                            Option<int?> optMtSleepInterval)
     {
         _optCsrOn = optCsrOn;
-        //_optCsrBreakOn = optCsrBreakOn;
-        //_optRngOn = optRngOn;
+        _optCsrBreakOn = optCsrBreakOn;
+        _optRngOn = optRngOn;
         _optMtSleepInterval = optMtSleepInterval;
     }
 
@@ -36,19 +36,22 @@ internal sealed class CsrConfigBinder : BinderBase<CsrConfig>
 
     protected override CsrConfig GetBoundValue(BindingContext bindingContext)
     {
-        var csr_config = new CsrConfig {};
-
-        csr_config.CsrOn = bindingContext.ParseResult.GetValueForOption(_optCsrOn) ?? ResolveMandatoryBoolArg(_optCsrOn);
-        //csr_config.CsrBreakOn = csr_config.CsrOn && ResolveMandatoryBoolArg(_optCsrBreakOn);
+        var csr_config = new CsrConfig
+        {
+            CsrOn = bindingContext.ParseResult.GetValueForOption(_optCsrOn) ?? ResolveMandatoryBoolArg(_optCsrOn),
+            RngOn = bindingContext.ParseResult.GetValueForOption(_optRngOn) ?? ResolveMandatoryBoolArg(_optRngOn),
+            MtSleepInterval = bindingContext.ParseResult.GetValueForOption(_optMtSleepInterval) ?? 16,
+        };
+        csr_config.CsrBreakOn = csr_config.CsrOn && ResolveMandatoryBoolArg(_optCsrBreakOn);
         return csr_config;
     }
 }
 
 internal sealed record CsrConfig
 {
-    public bool CsrOn { get; set; }
-    //public bool CsrBreakOn { get; set; }
-    //public bool RngOn { get; init; }
+    public bool CsrOn { get; init; }
+    public bool CsrBreakOn { get; set; }
+    public bool RngOn { get; init; }
     public int  MtSleepInterval { get; init; }
 };
 
@@ -59,7 +62,9 @@ public class Program
     private static Process Game = null;
     private static bool newGameSetUp = false;
 
-   // private static readonly BreakTransition BreakTransition = new BreakTransition { ForceLoad = false, Description = "Break Setup", ConsoleOutput = false, Suspendable = false, Repeatable = true };
+    private static bool newGameMenuUpdated = false;
+
+    private static readonly BreakTransition BreakTransition = new BreakTransition { ForceLoad = false, Description = "Break Setup", ConsoleOutput = false, Suspendable = false, Repeatable = true };
 
     // Cutscene Remover Version Number, 0x30 - 0x39 = 0 - 9, 0x48 = decimal point
     private const int majorID = 1;
@@ -76,20 +81,20 @@ public class Program
         DiagnosticLog.Information($"Cutscene Remover for Final Fantasy X, version {majorID}.{minorID}.{patchID}");
         if (args.Length > 0) DiagnosticLog.Information($"!!! LAUNCHED WITH COMMAND-LINE OPTIONS: {string.Join(' ', args)} !!!");
 
-        Option<bool?> optCsrOn = new Option<bool?>("--csr", "Enable CSR? [Y/N]");
-        //Option<bool?> optCsrBreakOn      = new Option<bool?>("--csrbreak", "Enable break for CSR? [Y/N]");
-        //Option<bool?> optRngOn           = new Option<bool?>("--truerng", "Enable True RNG? [Y/N]");
+        Option<bool?> optCsrOn           = new Option<bool?>("--csr", "Enable CSR? [Y/N]");
+        Option<bool?> optCsrBreakOn      = new Option<bool?>("--csrbreak", "Enable break for CSR? [Y/N]");
+        Option<bool?> optRngOn           = new Option<bool?>("--truerng", "Enable True RNG? [Y/N]");
         Option<int?>  optMtSleepInterval = new Option<int?>("--mt_sleep_interval", "Specify the main thread sleep interval. [ms]");
 
         RootCommand rootCmd = new RootCommand("Launches the FFX Cutscene Remover.")
         {
             optCsrOn,
-            //optCsrBreakOn,
-            //optRngOn,
+            optCsrBreakOn,
+            optRngOn,
             optMtSleepInterval
         };
 
-        rootCmd.SetHandler(MainLoop, new CsrConfigBinder(optCsrOn, optMtSleepInterval));
+        rootCmd.SetHandler(MainLoop, new CsrConfigBinder(optCsrOn, optCsrBreakOn, optRngOn, optMtSleepInterval));
 
         rootCmd.Invoke(args);
         return;
@@ -108,12 +113,16 @@ public class Program
                 continue;
             }
 
-            MemoryWatchers.Initialize(Game);
-            MemoryWatchers.Watchers.UpdateAll(Game);
+            startGameText = new List<(string, byte)> { };
 
-            List<byte> startGameIndents = new List<byte> (8);
+            if (csrConfig.CsrOn)
+            {
+                cutsceneRemover = new CutsceneRemover(csrConfig.MtSleepInterval);
+                cutsceneRemover.Game = Game;
+                startGameText.Add(($"[Cutscene Remover v{majorID}.{minorID}.{patchID}]", 0x49));
+            }
 
-            /*if (csrConfig.CsrBreakOn)
+            if (csrConfig.CsrBreakOn)
             {
                 startGameText.Add(($"[Cutscene Remover Break Enabled]", 0x00));
             }

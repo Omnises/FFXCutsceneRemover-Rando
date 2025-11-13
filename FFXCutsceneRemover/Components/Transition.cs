@@ -1157,7 +1157,7 @@ public class Transition
             RemoveDuplicates(formation);
             WriteBytes(MemoryWatchers.Formation, formation);
         } 
-    }
+    }*/
 
     private void RemoveDuplicates(byte[] formation)
     {

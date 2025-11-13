@@ -17,7 +17,7 @@ class IsaaruTransition : Transition
             }
             else if (MemoryWatchers.IsaaruTransition.Current == BaseCutsceneValue + 0x7F6C + 0x32 && Stage == 1)
             {
-                Formation = new byte[] { 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+                //Formation = new byte[] { 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
                 ConsoleOutput = false;
                 FullHeal = true;
                 base.Execute();

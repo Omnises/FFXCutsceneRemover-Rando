@@ -113,6 +113,15 @@ public class Program
 
             List<byte> startGameIndents = new List<byte> (8);
 
+            startGameText = new List<(string, byte)> { };
+
+            if (csrConfig.CsrOn)
+            {
+                cutsceneRemover = new CutsceneRemover(csrConfig.MtSleepInterval);
+                cutsceneRemover.Game = Game;
+                startGameText.Add(($"[Cutscene Remover v{majorID}.{minorID}.{patchID}]", 0x49));
+            }
+
             /*if (csrConfig.CsrBreakOn)
             {
                 startGameText.Add(($"[Cutscene Remover Break Enabled]", 0x00));
@@ -167,11 +176,6 @@ public class Program
                         new Transition { RoomNumber = 140, Storyline = 1310, SpawnPoint = 0, Description = "End of Break + Map + Rikku afraid + tutorial" }.Execute();
                     }
                 }*/
-
-                if (csrConfig.CsrOn)
-                {
-                    cutsceneRemover.MainLoop();
-                }
 
                 /*if (csrConfig.RngOn)
                 {

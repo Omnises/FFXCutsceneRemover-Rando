@@ -872,7 +872,8 @@ static class Transitions
             () => { return MemoryWatchers.RoomNumber.Current == 136 && MemoryWatchers.Storyline.Current == 1715; },
             BikanelTransition },
         { 
-            () => { return MemoryWatchers.RoomNumber.Current == 136 && MemoryWatchers.Storyline.Current == 1718 && MemoryWatchers.State.Current == 1; },
+            () => { return MemoryWatchers.RoomNumber.Current == 136 && MemoryWatchers.Storyline.Current == 1718 /*&& MemoryWatchers.EnableRikku.Current == 0 */&& MemoryWatchers.State.Current == 1; },
+
             new Transition { Storyline = 1720, SpawnPoint = 3, BikanelFlag = 32, Description = "Wakka Glare" } },
         { 
             () => { return MemoryWatchers.RoomNumber.Current == 138 && MemoryWatchers.Storyline.Current == 1720 && MemoryWatchers.State.Current == 1 && MemoryWatchers.MovementLock.Current == 0x30; }, 

@@ -23,7 +23,6 @@ class BrotherhoodTransition : Transition
         int characterDataStructRelativeOffset = 0xD3205C;
         byte characterDataStructSizeBytes = 148;
         byte equippedWeaponIndexOffset = 0x2D;
-        byte equippedArmorIndexOffset = 0x2E;
 
         byte equipmentIndex;
         byte characterIndex;

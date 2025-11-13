@@ -292,6 +292,7 @@ class NewGameTransition : Transition
 
         List<byte> modDialogueBytes = new List<byte>{ };
         Dictionary<char, (byte?, byte)> characterEncoding;
+        byte spacingYesNo = 0x00;
 
         int bytesToRead = 2048;
         dialogueBoxBytes = MemoryWatchers.DialogueFile.DeepPtr.DerefBytes(process, bytesToRead);
@@ -302,15 +303,19 @@ class NewGameTransition : Transition
         {
             case 0x00: // Japanese
                 characterEncoding = characterEncodingJapanese;
+                spacingYesNo = 0x52;
                 break;
             case 0x09: // Korean - Same Encoding as Chinese
                 characterEncoding = characterEncodingChinese;
+                spacingYesNo = 0x52;
                 break;
             case 0x0A: // Chinese
                 characterEncoding = characterEncodingChinese;
+                spacingYesNo = 0x52;
                 break;
             default:
                 characterEncoding = characterEncodingLatin;
+                spacingYesNo = 0x51;
                 break;
         }
 
@@ -344,7 +349,7 @@ class NewGameTransition : Transition
             else if (dialogueBoxBytes[i] == 0x07)
             {
                 arrangedYesNoBytes.Insert(0, dialogueBoxBytes[i]);
-                arrangedYesNoBytes[1] = 0x55;
+                arrangedYesNoBytes[1] = spacingYesNo;
             }
             else
             {
@@ -369,7 +374,7 @@ class NewGameTransition : Transition
             else if (dialogueBoxBytes[i] == 0x07)
             {
                 originalYesNoBytes.Insert(0, dialogueBoxBytes[i]);
-                originalYesNoBytes[1] = 0x55;
+                originalYesNoBytes[1] = spacingYesNo;
             }
             else
             {
@@ -434,6 +439,12 @@ class NewGameTransition : Transition
         // Add lines for original message box
         for (int i = 0; i < startGameText.Count; i++)
         {
+            if (startGameText[i].Item1 == "")
+            {
+                modDialogueBytes.Add(0x03);
+                continue;
+            }
+
             byte indent = startGameText[i].Item2;
             modDialogueBytes.Add(0x07);
             modDialogueBytes.Add(indent);

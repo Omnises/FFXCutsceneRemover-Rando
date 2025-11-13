@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Platforms>AnyCPU;x86</Platforms>
+	</PropertyGroup>
+
+	<!-- ADDITIONAL PROPERTIES -->
+	<PropertyGroup>
+		<Version>1.7.0</Version>
+		<RepositoryUrl>https://github.com/erickt420/FFXCutsceneRemover</RepositoryUrl>
+	</PropertyGroup>
+	
+	<!-- PACKAGE REFERENCES -->
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="2.10.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+	</ItemGroup>
+
+	<!-- APPLICATION ICON -->
+	<ItemGroup>
+	  <None Include="FFXCSR_icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+	</ItemGroup>
+	
+	<PropertyGroup>
+		<ApplicationIcon>FFXCSR_icon.png</ApplicationIcon>
+		<PackageIcon>FFXCSR_icon.png</PackageIcon>
+	</PropertyGroup>
+	
+</Project>

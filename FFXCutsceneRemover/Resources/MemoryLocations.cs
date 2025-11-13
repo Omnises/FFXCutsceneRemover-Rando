@@ -325,6 +325,9 @@ static class MemoryLocations
     // RNGmod
     public static MemoryLocation RNGArrayOpBytes = new MemoryLocation("RNGArrayOpBytes", 0x398903);
 
+    // Rng Locations
+    public static MemoryLocation rngArrayStart = new MemoryLocation("rngArrayStart", 0xD35ED8);
+
 }
 
 public struct MemoryLocation

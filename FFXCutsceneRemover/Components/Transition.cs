@@ -22,9 +22,9 @@ public class Transition
     public bool FullHeal = false;
     public bool FixMenu = false;
     public bool MenuCleanup = false;
-    public bool AddRewardItems = false;
-    public bool AddSinLocation = false;
-    public bool RemoveSinLocation = false;
+    //public bool AddRewardItems = false;
+    //public bool AddSinLocation = false;
+    //public bool RemoveSinLocation = false;
     public bool PositionPartyOffScreen = false;
     public bool PositionTidusAfterLoad = false;
     public bool KeepEncounterThreatAfterLoad = false;
@@ -517,25 +517,25 @@ public class Transition
             ClearAllBattleRewards();
         }
 
-        if (AddSinLocation)
+        /*if (AddSinLocation)
         {
             AddSin();
-        }
+        }*/
 
-        if (RemoveSinLocation)
+        /*if (RemoveSinLocation)
         {
             RemoveSin();
-        }
+        }*/
 
         if (PositionPartyOffScreen)
         {
             PartyOffScreen();
         }
 
-        if (!(AddItemsToInventory is null))
+        /*if (!(AddItemsToInventory is null))
         {
             AddItems(AddItemsToInventory);
-        }
+        }*/
 
         if (AddOverdrive > 0)
         {
@@ -756,7 +756,7 @@ public class Transition
         // Clear Gil
         WriteValue<int>(MemoryWatchers.GilBattleRewards, 0);
 
-        if (AddRewardItems)
+        /*if (AddRewardItems)
         {
             byte[] items = process.ReadBytes(MemoryWatchers.ItemsStart.Address, 224);
             byte[] itemsQty = process.ReadBytes(MemoryWatchers.ItemsQtyStart.Address, 112);
@@ -813,10 +813,10 @@ public class Transition
         process.WriteBytes(MemoryWatchers.BattleRewardEquip1.Address, Enumerable.Repeat((byte)0x00, 22 * 8).ToArray<byte>());
 
         // Clear AP Flags
-        WriteBytes(MemoryWatchers.CharacterAPFlags, new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
+        WriteBytes(MemoryWatchers.CharacterAPFlags, new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });*/
     }
 
-    private void AddItems((byte itemref, byte itemqty)[] AddItemsToInventory)
+    /*private void AddItems((byte itemref, byte itemqty)[] AddItemsToInventory)
     {
         byte[] items = process.ReadBytes(MemoryWatchers.ItemsStart.Address, 224);
         byte[] itemsQty = process.ReadBytes(MemoryWatchers.ItemsQtyStart.Address, 112);
@@ -857,9 +857,9 @@ public class Transition
 
         WriteBytes(MemoryWatchers.ItemsStart, items);
         WriteBytes(MemoryWatchers.ItemsQtyStart, itemsQty);
-    }
+    }*/
 
-    private void AddSin()
+    /*private void AddSin()
     {
         WriteValue<short>(MemoryWatchers.AirshipDestinations, (short)(MemoryWatchers.AirshipDestinations.Current + 512));
     }
@@ -867,7 +867,7 @@ public class Transition
     private void RemoveSin()
     {
         WriteValue<short>(MemoryWatchers.AirshipDestinations, (short)(MemoryWatchers.AirshipDestinations.Current - 512));
-    }
+    }*/
 
     private void PartyOffScreen()
     {
@@ -1159,7 +1159,7 @@ public class Transition
         } 
     }*/
 
-    private void RemoveDuplicates(byte[] formation)
+    /*private void RemoveDuplicates(byte[] formation)
     {
         bool[] characterPresent = new bool[81];
 
